@@ -6,7 +6,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files to:  /templates'
   inputs:
-    Contents: '**/mexl-deploy-dev.yaml'
+    Contents: '**/mexl-dev.yaml'
 
     TargetFolder: '$(build.artifactstagingdirectory)'
 
