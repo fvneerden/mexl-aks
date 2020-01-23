@@ -13,5 +13,7 @@ This deployment pipeline offers full flexibility to provision certain multi tena
 https://azure.microsoft.com/en-us/services/devops/
 https://azure.microsoft.com/en-us/services/container-registry/
 
+![Flow](/design-scte-35.jpg)
+
 # YAML Files
 Kubernetes Deployment
