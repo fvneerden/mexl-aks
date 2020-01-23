@@ -1,0 +1,57 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+ name: mexl-dev
+spec:
+ replicas: 1
+ template:
+  metadata:
+   labels:
+    app: mexl-dev
+  spec:
+   nodeName: {NODENAME FOR BINDING TO SPECIFIC HOST}
+   containers:
+    - name: mexl-dev-container
+      image: {CONTAINER_REGISTRY}/docker-hero:2.1
+      lifecycle:
+       postStart:
+        exec:
+          command: 
+           - "sh"
+           - "-c"
+           - >
+             curl https://{URLTOLICFILE} --output /etc/hera_license.xml;
+             SERVER_IP="$(ip addr show eth0 | grep 'inet ' | cut -f5 | awk '{ print $2}' | sed 's/...$//')";
+             curl https://{URLTOPHPSCRIPT} --output /usr/local/hera/hmsclient.php;
+             php /usr/local/hera/hmsclient.php adddev 10.0.0.4 $HOSTNAME $SERVER_IP aks Live
+       preStop:
+        exec:
+          command: 
+           - "sh"
+           - "-c"
+           - >
+             php /usr/local/hera/hmsclient.php deldev 10.0.0.4 $HOSTNAME
+      ports:
+       - containerPort: 80
+         protocol: TCP
+         name: http
+       - containerPort: 9000
+         protocol: TCP
+         name: herochannel1
+       - containerPort: 19711
+         protocol: UDP
+         name: herosrt1
+      securityContext:
+       privileged: true
+      volumeMounts:
+       - mountPath: /sys/fs/cgroup
+         name: cgroup
+       - mountPath: /var/run/docker.sock
+         name: docker-socket
+   volumes:
+    - name: cgroup
+      hostPath:
+       path: /sys/fs/cgroup
+    - name: docker-socket
+      hostPath:
+       path: /var/run/docker.sock
