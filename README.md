@@ -16,8 +16,8 @@ https://azure.microsoft.com/en-us/services/container-registry/
 ![Flow](/design-scte-35.jpg)
 
 # YAML MEXL-DEV.YAML
-This YAML file contains all settings for the deployment onto AKS. There are a few custom settings to replace and these are {BETWEEN CURLY BRACKETS}
+This YAML file contains all settings for the deployment onto AKS. There are a few custom settings to replace and these are **{BETWEEN CURLY BRACKETS}**
 
 # YAML PIPELINE.YAML
 This file as pretty simple. In DevOps it will instruct the agent to copy the deployment mexl-dev.yaml to the artifacts so it will be available for a release. 
-During a release a simple "kubectl apply -f {mexl-dev.yaml}" is used. 
+During a release a simple **"kubectl apply -f {mexl-dev.yaml}"** is used. 
