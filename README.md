@@ -15,6 +15,13 @@ https://azure.microsoft.com/en-us/services/container-registry/
 
 ![Flow](/design-scte-35.jpg)
 
+1)	Azure Pipeline is triggered to deploy onto AKS cluster. In the YAML file there is a reference to the MediaExcel Container in Azure Container Registry
+2)	AKS starts deployment and pulls container from Azure Container Registry
+3)	During Container start custom PHP script is loaded and container is added to the HMS (Hero Management Service). And placed into the correct device pool and job
+4)	Encoder loads source and (in this case) push 4K livestream into Azure Media Services
+5)	Media Services packaged Livestream into multiple formats and apply DRM
+6)	Azure CDN scales livestream
+
 # YAML MEXL-DEV.YAML
 This YAML file contains all settings for the deployment onto AKS. There are a few custom settings to replace and these are **{BETWEEN CURLY BRACKETS}**
 
