@@ -11,7 +11,7 @@ This deployment pipeline offers full flexibility to provision certain multi tena
 https://azure.microsoft.com/en-us/services/devops/
 https://azure.microsoft.com/en-us/services/container-registry/
 
-![Flow](/design-scte-35.jpg)
+![Flow](/aks-architecture-diagram.jpg)
 
 1)	Azure Pipeline is triggered to deploy onto AKS cluster. In the YAML file there is a reference to the MediaExcel Container in Azure Container Registry
 2)	AKS starts deployment and pulls container from Azure Container Registry
